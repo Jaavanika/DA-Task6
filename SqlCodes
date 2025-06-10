@@ -1,5 +1,7 @@
 SQL Codes
 
+Part 2: Business Insights Queries (MySQL / SQLite)
+
 1. Use strftime('%m', Date) for month (SQLite equivalent of EXTRACT(MONTH FROM Date))
 
 SELECT 
