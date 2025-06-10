@@ -1,0 +1,83 @@
+SQL Codes
+
+1. Use strftime('%m', Date) for month (SQLite equivalent of EXTRACT(MONTH FROM Date))
+
+SELECT 
+    strftime('%m', Date) AS month,
+    SUM("Total Revenue") AS monthly_revenue
+FROM 
+    sales_data
+GROUP BY 
+    month
+ORDER BY 
+    month;
+
+2. GROUP BY month (Transaction volume by month)
+
+SELECT 
+    strftime('%m', Date) AS month,
+    COUNT(DISTINCT "Transaction ID") AS transactions
+FROM 
+    sales_data
+GROUP BY 
+    month
+ORDER BY 
+    month;
+
+3. SUM() for revenue (Revenue by product category)
+
+SELECT 
+    "Product Category",
+    SUM("Total Revenue") AS total_revenue
+FROM 
+    sales_data
+GROUP BY 
+    "Product Category"
+ORDER BY 
+    total_revenue DESC;
+
+4. COUNT(DISTINCT order_id) for volume (Total transactions)
+
+SELECT 
+    COUNT(DISTINCT "Transaction ID") AS total_transactions
+FROM 
+    sales_data;
+
+5. ORDER BY for sorting (Revenue by product name)
+
+SELECT 
+    "Product Name",
+    SUM("Total Revenue") AS revenue
+FROM 
+    sales_data
+GROUP BY 
+    "Product Name"
+ORDER BY 
+    revenue DESC;
+
+6A. Filter for recent 6 months (Units sold by product name)
+
+SELECT 
+    "Product Name",
+    SUM("Units Sold") AS total_units
+FROM 
+    sales_data
+WHERE 
+    Date >= date('now', '-6 months')
+GROUP BY 
+    "Product Name"
+ORDER BY 
+    total_units DESC;
+
+6B. Top 5 products by revenue
+
+SELECT 
+    "Product Name",
+    SUM("Total Revenue") AS revenue
+FROM 
+    sales_data
+GROUP BY 
+    "Product Name"
+ORDER BY 
+    revenue DESC
+LIMIT 5;
